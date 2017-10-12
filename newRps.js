@@ -11,57 +11,60 @@ function getHand2() {
 }
 
 // vv two players
-var p1 = { name: 'Brandon', throw: getHand() };
-var p2 = { name: 'Ashley', throw: getHand2() };
-
-console.log(p1.throw);
-console.log(p2.throw);
+var p1 = { name: 'Brandon'};
+var p2 = { name: 'Ashley'};
 
 function playRound(player1, player2) {
-  if (player1.throw === player2.throw) {
-    console.log(
-      `${player1.name} played: ${player1.throw} and ${player2.name} played: ${player2.throw}`
-    );
+  var rn = getHand(); //p1's random throw
+  var rn2 = getHand2(); //p2's random throw
+
+  if (rn === rn2) {
+    console.log(`${p1.name} played: ${rn} and ${p2.name} played: ${rn2}`);
     console.log("It's a tie!");
-  } else if (
-    (player1.throw === 'rock' && player2.throw === 'scissors') ||
-    (player1.throw === 'scissors' && player2.throw === 'paper') ||
-    (player1.throw === 'paper' && player2.throw === 'rock')
-  ) {
-    console.log(
-      `${player1.name} played: ${player1.throw} and ${player2.name} played: ${player2.throw}`
-    );
-    console.log(`${player1.name} won`);
-  } else {
-    console.log(
-      `${player1.name} played: ${player1.throw} and ${player2.name} played: ${player2.throw}`
-    );
-    console.log(`${player2.name} won`);
+  }
+  else if ((rn === 'rock' && rn2 === 'scissors') ||
+    (rn === 'scissors' && rn2 === 'paper') ||
+    (rn === 'paper' && rn2 === 'rock')) {
+    console.log(`${p1.name} played: ${rn} and ${p2.name} played: ${rn2}`);
+    console.log(`${p1.name} won`);
+  }
+  else {
+    console.log(`${p1.name} played: ${rn} and ${p2.name} played: ${rn2}`);
+    console.log(`${p2.name} won`);  
   }
 }
 
 function playGame(player1, player2, playUntil) {
   var scoreP1 = 0;
   var scoreP2 = 0;
-  //var playUntil = 0;
+  var rn = getHand(); //p1's random throw
+  var rn2 = getHand2(); //p2's random throw
 
-  while (scoreP1 <= playUntil && scoreP2.throw <= playUntil) {
-    if (player1.throw === player2) {
-      console.log(
-        `${player1.name} played: ${player1.throw} and ${player2.name} played ${player2.throw}...  So it was a tie.`
-      );
-    } else if (
-      (player1.throw === 'rock' && player2.throw === 'scissors') ||
-      (player1.throw === 'scissors' && player2.throw === 'paper') ||
-      (player1.throw === 'paper' && player2.throw === 'rock')
-    ) {
-      // vv if player one wins.
-      scoreP1++;
-      console.log(`${player1.name} scored a point!`);
-    } else {
-      //player 2 wins
+  while ((scoreP1 < playUntil) && (scoreP2 < playUntil)) {
+    if (rn === rn2) {
+    console.log(`${p1.name} played: ${rn} and ${p2.name} played: ${rn2}`);
+    console.log("It's a tie!");
+    }
+    else if ((rn === 'rock' && rn2 === 'scissors') ||
+    (rn === 'scissors' && rn2 === 'paper') ||
+    (rn === 'paper' && rn2 === 'rock')) {
+    console.log(`${p1.name} played: ${rn} and ${p2.name} played: ${rn2}`);
+    console.log(`${p1.name} won`);
+    console.log(`${p1.name} scored a point!`);
+    scoreP1++;
+    }
+    else {
+      console.log(`${p1.name} played: ${rn} and ${p2.name} played: ${rn2}`);
+      console.log(`${p2.name} won`);       
+      console.log(`${p2.name} scored a point!`);
       scoreP2++;
-      console.log(`${player2.name} scored a point!`);
     }
   }
+  if (scoreP1 === playUntil) {
+    console.log(`${p1.name} won the game`);
+  } 
+  else {
+    console.log(`${p2.name} won the game`);
+  }
+
 }
